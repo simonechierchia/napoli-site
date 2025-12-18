@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Napoli Fan Hub | Sito dedicato alla SSC Napoli</title>
+  <meta name="description" content="Sito fan dedicato alla Società Sportiva Calcio Napoli: storia, trofei, rosa, notizie e contatti." />
+  <style>
+    :root{
+      --bg:#071426;
+      --card:#0b203b;
+      --card2:#0a1b32;
+      --text:#eaf2ff;
+      --muted:#b6c7e6;
+      --line:rgba(255,255,255,.12);
+      --accent:#2aa7ff;   /* azzurro */
+      --accent2:#ffffff;  /* bianco */
+      --warning:#ffd24a;
+      --shadow: 0 18px 50px rgba(0,0,0,.35);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 700px at 20% 10%, rgba(42,167,255,.22), transparent 55%),
+                  radial-gradient(1000px 650px at 80% 10%, rgba(255,255,255,.08), transparent 55%),
+                  radial-gradient(900px 600px at 50% 85%, rgba(42,167,255,.10), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--max); margin:0 auto; padding:0 18px; }
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:10;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(to bottom, rgba(7,20,38,.92), rgba(7,20,38,.65));
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:14px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .badge{
+      width:38px; height:38px; border-radius:50%;
+      display:grid; place-items:center;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), rgba(255,255,255,.08)),
+                  linear-gradient(135deg, rgba(42,167,255,.9), rgba(42,167,255,.35));
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+      font-weight:900;
+    }
+    .links{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center; justify-content:flex-end;
+    }
+    .links a{
+      padding:8px 10px;
+      border:1px solid transparent;
+      border-radius:999px;
+      color:var(--muted);
+      font-weight:650;
+    }
+    .links a:hover{
+      border-color:rgba(255,255,255,.16);
+      color:var(--text);
+      background: rgba(255,255,255,.06);
+    }
+    .cta{
+      padding:9px 12px !important;
+      background: linear-gradient(135deg, rgba(42,167,255,.95), rgba(42,167,255,.55));
+      color:#031021 !important;
+      border-color: rgba(255,255,255,.18) !important;
+      box-shadow: 0 10px 26px rgba(42,167,255,.20);
+    }
+
+    /* Hero */
+    .hero{
+      padding:44px 0 18px;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .heroCard{
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .heroCard .inner{ padding:26px; }
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
+      font-weight:650;
+      font-size: 13px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(42,167,255,.18);
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .sub{
+      margin:0 0 16px;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+    .pillRow{ display:flex; flex-wrap:wrap; gap:10px; margin-top:14px;}
+    .pill{
+      padding:10px 12px;
+      border:1px solid rgba(255,255,255,.14);
+      border-radius: 999px;
+      background: rgba(7,20,38,.35);
+      color: var(--text);
+      font-weight:700;
+      font-size: 13px;
+    }
+
+    .stats{
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:12px;
+      height:100%;
+    }
+    .stat{
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      padding:16px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .stat b{ font-size: 22px; letter-spacing:-.3px; }
+    .stat span{ color: var(--muted); font-weight:650; font-size: 13px; }
+
+    /* Sections */
+    section{ padding: 18px 0; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:14px; margin: 10px 0 12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:-.2px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      font-weight:600;
+      font-size: 13px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 14px 42px rgba(0,0,0,.22);
+    }
+    .card h3{ margin:0 0 8px; font-size: 16px; }
+    .card p{ margin:0; color: var(--muted); }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:stretch;
+    }
+
+    .list{
+      display:flex; flex-direction:column; gap:10px;
+      margin-top:10px;
+    }
+    .row{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .row strong{ font-size: 14px; }
+    .row small{ color: var(--muted); font-weight:650; }
+    .tag{
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(42,167,255,.12);
+      color: var(--text);
+      font-weight:800;
+      font-size: 12px;
+      white-space:nowrap;
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    .ph{
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(400px 180px at 30% 30%, rgba(42,167,255,.20), transparent 60%),
+        linear-gradient(135deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      height: 130px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ph:after{
+      content:"";
+      position:absolute; inset:-40px;
+      background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,.12), transparent 70%);
+      transform: translateX(-30%);
+      animation: shine 3.6s ease-in-out infinite;
+    }
+    @keyframes shine{
+      0%{ transform: translateX(-40%); }
+      60%{ transform: translateX(40%); }
+      100%{ transform: translateX(40%); }
+    }
+    .ph span{
+      position:absolute; left:12px; bottom:10px;
+      font-weight:800; font-size: 12px; color: rgba(234,242,255,.85);
+      background: rgba(7,20,38,.45);
+      border:1px solid rgba(255,255,255,.12);
+      padding:6px 10px; border-radius:999px;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Footer */
+    footer{
+      padding: 22px 0 34px;
+      color: var(--muted);
+      border-top:1px solid var(--line);
+      margin-top: 10px;
+    }
+    .fineprint{
+      font-size: 12px; line-height:1.6;
+      opacity:.95;
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .heroGrid{ grid-template-columns:1fr; }
+      .grid3{ grid-template-columns:1fr; }
+      .split{ grid-template-columns:1fr; }
+      .gallery{ grid-template-columns: repeat(2, 1fr); }
+      .links{ gap:6px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="nav">
+        <div class="brand" aria-label="Brand">
+          <div class="badge">N</div>
+          <div>
+            Napoli Fan Hub<br />
+            <span style="color:var(--muted); font-weight:650; font-size:12px;">Sito non ufficiale</span>
+          </div>
+        </div>
+
+        <div class="links" aria-label="Navigazione">
+          <a href="#storia">Storia</a>
+          <a href="#trofei">Trofei</a>
+          <a href="#rosa">Rosa</a>
+          <a href="#partite">Partite</a>
+          <a href="#gallery">Gallery</a>
+          <a class="cta" href="#contatti">Contatti</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <div class="heroGrid">
+        <div class="heroCard">
+          <div class="inner">
+            <div class="kicker"><span class="dot"></span> Società Sportiva Calcio Napoli — fan page</div>
+            <h1>Azzurro, passione, Napoli.</h1>
+            <p class="sub">
+              Uno spazio pulito e moderno dedicato al Napoli: storia, trofei, curiosità e una sezione
+              per aggiornamenti/partite (da collegare a un tuo calendario o widget).
+            </p>
+            <div class="pillRow">
+              <div class="pill">⚽ News & aggiornamenti</div>
+              <div class="pill">🏆 Palmares</div>
+              <div class="pill">📅 Calendario partite</div>
+              <div class="pill">📸 Gallery</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats" aria-label="Riepilogo rapido">
+          <div class="stat">
+            <span>Colori</span>
+            <b>Azzurro & Bianco</b>
+          </div>
+          <div class="stat">
+            <span>Città</span>
+            <b>Napoli</b>
+          </div>
+          <div class="stat">
+            <span>Stadio</span>
+            <b>Diego Armando Maradona</b>
+          </div>
+          <div class="stat">
+            <span>Obiettivo sito</span>
+            <b>Fan Hub</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="storia">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Storia (testo modificabile)</h2>
+          <p>Scrivi qui la tua sintesi: epoche, leggende, momenti chiave.</p>
+        </div>
+
+        <div class="split">
+          <div class="card">
+            <h3>Le origini</h3>
+            <p>
+              Inserisci una breve cronologia: fondazione, crescita, identità della tifoseria e valori del club.
+            </p>
+            <div class="list">
+              <div class="row"><strong>Periodo</strong><small>Descrizione breve</small><span class="tag">Timeline</span></div>
+              <div class="row"><strong>Icone</strong><small>Allenatori e calciatori simbolo</small><span class="tag">Leggende</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Identità</h3>
+            <p>
+              Racconta cosa rende unico il Napoli: cultura, città, stadio, colore azzurro, tifo e tradizione.
+            </p>
+            <div class="list">
+              <div class="row"><strong>Stile</strong><small>Gioco, carattere e mentalità</small><span class="tag">DNA</span></div>
+              <div class="row"><strong>Community</strong><small>Curva, cori, rituali</small><span class="tag">Tifo</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="trofei">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Trofei</h2>
+          <p>Compila i numeri corretti e aggiorna quando vuoi.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="card">
+            <h3>Campionati</h3>
+            <p>Elenca qui gli scudetti / piazzamenti storici (testo libero).</p>
+          </div>
+          <div class="card">
+            <h3>Coppe nazionali</h3>
+            <p>Coppa Italia / Supercoppe: aggiungi anni e note.</p>
+          </div>
+          <div class="card">
+            <h3>Europa</h3>
+            <p>Risultati europei e stagioni memorabili.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="rosa">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Rosa (placeholder)</h2>
+          <p>Sostituisci con nomi reali o collega un Google Sheet.</p>
+        </div>
+
+        <div class="split">
+          <div class="card">
+            <h3>Portieri</h3>
+            <div class="list">
+              <div class="row"><strong>Giocatore 1</strong><small>#1</small><span class="tag">POR</span></div>
+              <div class="row"><strong>Giocatore 2</strong><small>#12</small><span class="tag">POR</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Difensori / Centrocampisti / Attaccanti</h3>
+            <div class="list">
+              <div class="row"><strong>Giocatore A</strong><small>Ruolo</small><span class="tag">DIF</span></div>
+              <div class="row"><strong>Giocatore B</strong><small>Ruolo</small><span class="tag">CEN</span></div>
+              <div class="row"><strong>Giocatore C</strong><small>Ruolo</small><span class="tag">ATT</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px;">
+          <h3>Tip: collegare un Google Sheet</h3>
+          <p>
+            Puoi creare una tabella rosa su Google Fogli e poi in Google Sites usare
+            <b>Inserisci → Fogli</b> per mostrare i dati aggiornati automaticamente.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="partite">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Partite</h2>
+          <p>Qui puoi inserire un calendario (Google Calendar) o un widget esterno.</p>
+        </div>
+
+        <div class="card">
+          <h3>Prossimi match (esempio)</h3>
+          <div class="list">
+            <div class="row"><strong>Napoli vs Avversario</strong><small>Data • Ora</small><span class="tag">SERIE A</span></div>
+            <div class="row"><strong>Avversario vs Napoli</strong><small>Data • Ora</small><span class="tag">COPPA</span></div>
+            <div class="row"><strong>Napoli vs Avversario</strong><small>Data • Ora</small><span class="tag">EUROPA</span></div>
+          </div>
+          <p style="margin-top:10px; color:var(--muted);">
+            In Google Sites puoi usare <b>Inserisci → Calendario</b> per mostrare gli eventi reali.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Gallery</h2>
+          <p>Segnaposto: sostituisci con immagini tue (attenzione ai diritti).</p>
+        </div>
+
+        <div class="gallery">
+          <div class="ph"><span>Stadio</span></div>
+          <div class="ph"><span>Tifo</span></div>
+          <div class="ph"><span>Partita</span></div>
+          <div class="ph"><span>Dettagli</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contatti">
+      <div class="container">
+        <div class="sectionTitle">
+          <h2>Contatti</h2>
+          <p>Form semplice: puoi sostituire con Google Form.</p>
+        </div>
+
+        <div class="split">
+          <div class="card">
+            <h3>Scrivici</h3>
+            <p style="margin-bottom:12px;">Inserisci email social o link utili.</p>
+            <div class="list">
+              <div class="row"><strong>Email</strong><small>tuaemail@example.com</small><span class="tag">INFO</span></div>
+              <div class="row"><strong>Instagram</strong><small>@tuopagina</small><span class="tag">SOCIAL</span></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Disclaimer</h3>
+            <p>
+              Questo è un sito <b>non ufficiale</b> realizzato da tifosi. Marchi, loghi e nomi citati
+              appartengono ai rispettivi proprietari. Usa solo contenuti di cui hai i diritti.
+            </p>
+            <p style="margin-top:10px; color:var(--warning); font-weight:800;">
+              ✔ Consiglio: per il logo ufficiale, evita l’uso se non autorizzato. Meglio icone generiche.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="fineprint">
+        © <span id="year"></span> Napoli Fan Hub — Template HTML/CSS per incorporamento in Google Sites.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
